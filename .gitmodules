@@ -1,0 +1,3 @@
+[submodule "lizard"]
+	path = lizard
+	url = https://github.com/nrisse/lizard.git

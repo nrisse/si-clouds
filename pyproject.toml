@@ -1,0 +1,25 @@
+[project]
+name = "si-clouds"
+version = "0.0.1"
+description = "Cloud retrieval over sea ice from HAMP observations"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+keywords = ["sea ice", "clouds", "retrieval", "smrt", "pamtra"]
+authors = [
+  {name = "Nils Risse", email = "n.risse@uni-koeln.de" }
+]
+maintainers = [
+  {name = "Nils Risse", email = "n.risse@uni-koeln.de" }
+]
+
+dependencies = [
+]
+
+[project.optional-dependencies] # Optional
+dev = ["check-manifest"]
+test = ["coverage"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

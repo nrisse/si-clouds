@@ -1,0 +1,168 @@
+# Definition of retrieval setup parameters
+
+atmosphere:
+  source: era5
+  n: 137
+  nr: 0
+  hydro_zmin: 0
+  hydro_zmax: 4000
+  hydro_mean: [0]
+  hydro_std: [0.15]
+  variables:
+    thermodynamic:
+      - t
+      - qv
+    hydro:
+      - cwp
+  era5_cov_scaling: 1
+
+surface:
+  smrt_layers_filename: smrt_layers_r2.yaml
+  medium_snow_covered_ice: myi_two_layer_snow
+  medium_young_ice: yi
+  source_t_as: era5
+  source_t_si: null
+  ir_emissivity: 0.995
+  tas2tsi_factor: 0.25
+  t_as: null
+  t_as_std: 3
+  t_si: null
+  t_si_std: 3
+  yi_fraction: 0 
+  yi_fraction_std: 0.15
+  wind_slab_volumetric_liquid_water: 0
+  variables_r:
+    - wind_slab_corr_length
+    - depth_hoar_corr_length
+    - wind_slab_thickness
+    - t_si
+    - t_as
+  variables:
+    - wind_slab_corr_length
+    - depth_hoar_corr_length
+    - wind_slab_thickness
+    - t_si
+    - t_as
+    - yi_fraction
+    - wind_slab_volumetric_liquid_water
+  channels: [1, 7, 8, 15, 19, 25]
+
+forward_model:
+  model_variables:
+    - depth_hoar_thickness
+    - wind_slab_density
+    - depth_hoar_density
+    - specularity
+  model_variables_mean:
+    - 0.15
+    - 350
+    - 200
+    - 0
+  model_variables_std:
+    - 0.03
+    - 30
+    - 30
+    - 0.25
+
+observation:
+  instrument: HAMP
+  satellite: unspecified
+  altitude: null
+  angle: 0
+  channels:
+    - 1
+    - 7
+    - 8
+    - 15
+    - 19
+    - 25
+  uncertainty:
+    1: 1.5
+    2: 1.5
+    3: 1.5
+    4: 1.5
+    5: 1.5
+    6: 1.5
+    7: 1.5
+    8: 1.5
+    9: 1.5
+    10: 1.5
+    11: 1.5
+    12: 1.5
+    13: 1.5
+    14: 1.5
+    15: 1.5
+    16: 1.5
+    17: 1.5
+    18: 1.5
+    19: 1.5
+    20: 2
+    21: 2
+    22: 2
+    23: 2
+    24: 2
+    25: 2
+
+pamtra:
+  angle: [0, 7, 12.8, 18.5, 24.2, 30, 35.7, 41.4, 47.1, 52.8, 58.6, 64.3, 70, 75.7, 81.4, 87.1]
+  nmlSet:
+    creator: Nils Risse
+    active: False
+    passive: True
+    outpol: VH
+    add_obs_height_to_layer: False
+    gas_mod: R98
+    liq_mod: TKC
+  descriptor_file: ./src/si_clouds/retrieval/settings/descriptor_file_ecmwf.txt
+  descriptor_file_order: [cwp, iwp, rwp, swp]
+
+general:
+  convergence_test: "x"
+  perturbations:  # for Jacobian computation: xb_perturbed = xb + perturbation * xb_error
+    t_si: 0.5
+    t_as: 0.5
+    cwp: 0.5
+    rwp: 0.5
+    swp: 0.5
+    specularity: 4  # ensures that perturbation * model_variables_std = 1
+    depth_hoar_density: 1
+    wind_slab_density: 1
+    depth_hoar_thickness: 0.5
+    wind_slab_thickness: 0.5
+    yi_fraction: 0.25
+    other: 0.1
+  x_lower_limit:
+    cwp: 0
+    rwp: 0
+    swp: 0
+    wind_slab_corr_length: 0.05
+    wind_slab_density: 150
+    wind_slab_thickness: 0.03
+    depth_hoar_corr_length: 0.1
+    depth_hoar_density: 100
+    depth_hoar_thickness: 0.03
+    yi_fraction: 0
+    t_si: 243.15
+    t_as: 233.15
+  x_upper_limit:
+    cwp: 1
+    rwp: 1
+    swp: 1
+    wind_slab_corr_length: 0.25
+    wind_slab_density: 450
+    wind_slab_thickness: 0.4
+    depth_hoar_corr_length: 0.6
+    depth_hoar_density: 400
+    depth_hoar_thickness: 0.4
+    yi_fraction: 1
+    t_si: 271.15
+    t_as: 273.14
+  scales:  # x_rescaled = x / scale
+    t_si: 300
+    t_as: 300
+  gamma_factor: [1, 1, 1, 1, 1, 1]
+  convergence_factor: 10
+  max_iter: 6
+  contact: n.risse@uni-koeln.de
+  n_processes_pamtra: 8
+  n_processes_smrt: 6

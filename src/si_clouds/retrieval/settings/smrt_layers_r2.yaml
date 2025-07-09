@@ -1,0 +1,155 @@
+# Sea ice and snow layer definitions for SMRT simulations.
+# The individual sea ice and snow layer definitions allow for sensitivity tests
+# and simulations with few fixed and few varying parameters. Also, layer 
+# arrangement is flexible, e.g., number of snow layers, sea ice types, etc.
+# Profiles (snowpack or sea ice) are combined to mediums.
+# Gaussian distributions assumed for all uncertainty ranges: [mean, std]
+# Temperatures are defined only at interfaces and not for each layer as 
+# expected by SMRT.
+base_layers:
+  snow:
+    surface_snow:
+      density: [125, 37.5]
+      corr_length: [0.07e-3, 0.015e-3]
+      thickness: [0.05, 0.02]
+      volumetric_liquid_water: 0
+      salinity: 0
+    wind_slab:
+      density: [350, 30]
+      corr_length: [0.12e-3, 0.03e-3]
+      thickness: [0.2, 0.04]
+      volumetric_liquid_water: 0
+      salinity: 0
+    depth_hoar:
+      density: [200, 30]
+      corr_length: [0.34e-3, 0.09e-3]
+      thickness: [0.15, 0.03]
+      volumetric_liquid_water: 0
+      salinity: 0
+    depth_hoar_saline:
+      density: [325, 37.5]
+      corr_length: [0.35e-3, 0.05e-3]
+      thickness: [0.05, 0.01]
+      volumetric_liquid_water: 0
+      salinity: [5, 2]
+  sea_ice:
+    yi_1:
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.3, 0.025]
+      salinity: [30, 1]
+    fyi_1: 
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.75, 0.15]
+      salinity: [10, 3]
+    myi_1:
+      density: [850, 40]
+      corr_length: [0.28e-3, 0.035e-3]
+      thickness: [1.5, 0.25]
+      salinity: [1.2, 0.2]
+    fyi_a_1:
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.04, 0.01]
+      salinity: [10, 3]
+    fyi_a_2:
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.2, 0.05]
+      salinity: [9, 2]
+    fyi_a_3:
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.25, 0.075]
+      salinity: [5, 1]
+    fyi_a_4:
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.4, 0.1]
+      salinity: [5, 1]
+    fyi_a_5:
+      density: [915, 30]
+      corr_length: [0.15e-3, 0.07e-3]
+      thickness: [0.1, 0.025]
+      salinity: [30, 1]
+    myi_a_1:
+      density: [895, 40]
+      corr_length: [0.28e-3, 0.035e-3]
+      thickness: [0.04, 0.01]
+      salinity: [0.5, 0.1]
+    myi_a_2:
+      density: [895, 40]
+      corr_length: [0.28e-3, 0.035e-3]
+      thickness: [0.2, 0.05]
+      salinity: [0.5, 0.1]
+    myi_a_3:
+      density: [915, 30]
+      corr_length: [0.28e-3, 0.035e-3]
+      thickness: [1, 0.25]
+      salinity: [1.5, 0.5]
+    myi_a_4:
+      density: [915, 30]
+      corr_length: [0.28e-3, 0.035e-3]
+      thickness: [1, 0.25]
+      salinity: [3, 1]
+    myi_a_5:
+      density: [915, 30]
+      corr_length: [0.28e-3, 0.035e-3]
+      thickness: [0.25, 0.05]
+      salinity: [4, 1]
+
+profiles:
+  snow:
+    two_layer:
+      layer_order: [wind_slab, depth_hoar]
+    three_layer:
+      layer_order: [surface_snow, wind_slab, depth_hoar]
+  sea_ice:
+    yi:
+      layer_order: [yi_1]
+      ice_type: firstyear
+    fyi:
+      layer_order: [fyi_1]
+      ice_type: firstyear
+    myi:
+      layer_order: [myi_1]
+      ice_type: multiyear
+    fyi_a:
+      layer_order: [fyi_a_1, fyi_a_2, fyi_a_3, fyi_a_4, fyi_a_5]
+      ice_type: firstyear
+    myi_a:
+      layer_order: [myi_a_1, myi_a_2, myi_a_3, myi_a_4, myi_a_5]
+      ice_type: multiyear
+
+mediums:
+  yi: 
+    snow: null
+    sea_ice: yi
+    temperature_as: [255, 7.5]
+    temperature_si: null
+    temperature_iw: 271.35
+  fyi_two_layer_snow:
+    snow: two_layer
+    sea_ice: fyi
+    temperature_as: [255, 7.5]
+    temperature_si: [260, 5]
+    temperature_iw: 271.35
+  fyi_three_layer_snow:
+    snow: three_layer
+    sea_ice: fyi
+    temperature_as: [255, 7.5]
+    temperature_si: [260, 5]
+    temperature_iw: 271.35
+  myi_two_layer_snow:
+    snow: two_layer
+    sea_ice: myi
+    temperature_as: [255, 7.5]
+    temperature_si: [260, 5]
+    temperature_iw: 271.35
+  myi_three_layer_snow:
+    snow: three_layer
+    sea_ice: myi
+    temperature_as: [255, 7.5]
+    temperature_si: [260, 5]
+    temperature_iw: 271.35

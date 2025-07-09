@@ -1,0 +1,5 @@
+!#'hydro_name' 'as_ratio' 'liq_ice' 'rho_ms' 'a_ms' 'b_ms' 'alpha_as' 'beta_as' 'moment_in' 'nbin' 'dist_name' 'p_1' 'p_2' 'p_3' 'p_4' 'd_1' 'd_2' 'scat_name' 'vel_size_mod' 'canting'
+cwc_q  1.0   1  -99.0  -99.0  -99.0  -99.0  -99.0  3  1  mono  -99.0  -99.0  -99.0  -99.0  2.d-05  -99.0  mie-sphere  khvorostyanov01_drops  -99.0
+iwc_q  1.0  -1  700.0  -99.0  -99.0  -99.0  -99.0  3  1  mono  -99.0  -99.0  -99.0  -99.0  6.d-05  -99.0  ssrg-rt3 heymsfield10_particles  -99.0
+rwc_q  1.0   1  -99.0  -99.0  -99.0  -99.0  -99.0  3  50  exp  0.22  2.2  -99.0  -99.0  0.00012  0.006 mie-sphere khvorostyanov01_drops  -99.0
+swc_q  0.6  -1  -99.0  0.069  2.0  -99.0  -99.0  3  50  exp  2.d06 0.  -99.  -99.0  2.d-04  0.02  ssrg-rt3  heymsfield10_particles  -99.0
